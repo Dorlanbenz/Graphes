@@ -8,7 +8,18 @@ public class ClientGraphe {
                 {0,2,3},
 
         };
-        Graphe g1 = new Graphe(tabVoisins);
-        System.out.println(g1);
+
+        int [][] tabVoisins2 = {
+                {1,2},
+                {},
+                {5},
+                {2,4},
+                {5},
+                {}
+        };
+
+        Graphe graphe = new Graphe(tabVoisins2);
+        System.out.println(graphe);
+
     }
 }

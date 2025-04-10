@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Graphe {
     private TreeMap<Integer, Set<Integer>> sommetVoisin;
+    private TreeMap<Integer, Integer> degreEntrant;
 
     public Graphe(int[][] parsomVoisin) {
         sommetVoisin = new TreeMap<>();
@@ -13,6 +15,15 @@ public class Graphe {
                 voisin.add(parsomVoisin[i][j]);
             }
             sommetVoisin.put(i, voisin);
+        }
+        degreEntrant = new TreeMap<>();
+        for(int Sommet : sommetVoisin.keySet()) {
+            degreEntrant.put(Sommet,0);
+        }
+        for (int sommet : sommetVoisin.keySet()) {
+            for (int voisins : sommetVoisin.get(sommet)) {
+                degreEntrant.put(voisins, degreEntrant.get(voisins) + 1);
+            }
         }
     }
 
@@ -35,9 +46,6 @@ public class Graphe {
         }
         return somme /2;
     }
-
-
-
 
     public int degre_minimal(){
         int[] tousDegreMin = new int[this.getOrdre()];
@@ -73,9 +81,15 @@ public class Graphe {
 
     }
 
+    public ArrayList<Integer> topologie(){
+        ArrayList<Integer> listeTopo = new ArrayList<>();
+        TreeMap<Integer, Integer> degEntrant = degreEntrant;
+
+    }
+
     public String toString() {
         String affichage = "ordre : " + this.getOrdre() + "\n" + "taille : " + this.taille() + "\n"
-                + "degré_minimal : " + this.degre_minimal() + "\n" + "degré_maximal : " + this.degre_maximal() + "\n";
+                + "degré_minimal : " + this.degre_minimal() + "\n" + "degré_maximal : " + this.degre_maximal() + "\n" + degreEntrant.toString() + "\n";
         for(int i : sommetVoisin.keySet()) {
             affichage += "sommet " + i + " degré=" + this.degre(i) + " voisins : " + sommetVoisin.get(i) + "\n";
         }
